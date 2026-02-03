@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Be My Valentine 💖</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            text-align: center;
+            padding-top: 100px;
+            color: #fff;
+        }
+        button {
+            padding: 15px 30px;
+            font-size: 18px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .yes {
+            background-color: #ff4d6d;
+            color: white;
+        }
+        .no {
+            background-color: #555;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Rushil, will you be my Valentine? 💘</h1>
+
+    <div id="buttons">
+        <button class="yes" onclick="sayYes()">Yes 💖</button>
+        <button class="no" onclick="sayNo()">No 😶</button>
+    </div>
+
+    <h2 id="message"></h2>
+
+    <script>
+        function sayYes() {
+            document.getElementById("message").innerHTML =
+                "Yay! 💕<br><br>" +
+                "“In all the world, there is no heart for me like yours. " +
+                "In all the world, there is no love for you like mine.” 💫";
+            document.getElementById("buttons").style.display = "none";
+        }
+
+        function sayNo() {
+            document.getElementById("message").innerHTML =
+                "Are you sure what you clicked? 😏<br><br>" +
+                "<button class='yes' onclick='sayYes()'>Yes 💖</button>";
+        }
+    </script>
+
+</body>
+</html>
