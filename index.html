@@ -2,46 +2,146 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine Alert 🚨</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Valentine 💖</title>
 
 <style>
     body {
         margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff5f9e, #ffc371);
         height: 100vh;
-        background: radial-gradient(circle, #ff758c, #ff7eb3);
+        overflow: hidden;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-family: 'Comic Sans MS', cursive;
         color: white;
-        overflow: hidden;
     }
 
-    .card {
-        background: rgba(0,0,0,0.3);
-        padding: 40px;
+    .container {
+        background: rgba(0,0,0,0.35);
+        width: 90%;
+        max-width: 400px;
+        padding: 25px;
         border-radius: 20px;
         text-align: center;
-        animation: pop 1s ease;
+        position: relative;
+        z-index: 2;
     }
 
     h1 {
-        animation: bounce 1.5s infinite;
+        font-size: 24px;
+        margin-bottom: 15px;
     }
 
     button {
-        padding: 15px 35px;
-        font-size: 20px;
-        border-radius: 12px;
+        padding: 12px 25px;
+        font-size: 18px;
+        border-radius: 10px;
         border: none;
-        margin: 15px;
+        margin: 10px;
         cursor: pointer;
-        transition: transform 0.2s;
-    }
-
-    button:hover {
-        transform: scale(1.1);
     }
 
     .yes {
         background: #ff2e63;
+        color: white;
+    }
+
+    .no {
+        background: #555;
+        color: white;
+    }
+
+    img {
+        width: 100%;
+        border-radius: 15px;
+        margin-top: 15px;
+    }
+
+    /* Floating hearts */
+    .heart {
+        position: absolute;
+        bottom: -20px;
+        font-size: 20px;
+        animation: floatUp 6s linear infinite;
+        opacity: 0.7;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 1; }
+        100% { transform: translateY(-110vh); opacity: 0; }
+    }
+</style>
+</head>
+
+<body onclick="startMusic()">
+
+<audio id="bgMusic" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <h1 id="text">Rushil 💖<br>Will you be my Valentine?</h1>
+
+    <div id="buttons">
+        <button class="yes" onclick="yesClick()">YES 😍</button>
+        <button class="no" onclick="noClick()">NO 😶</button>
+    </div>
+
+    <img id="gif" src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" alt="gif">
+</div>
+
+<script>
+let noCount = 0;
+let musicStarted = false;
+
+function startMusic() {
+    if (!musicStarted) {
+        document.getElementById("bgMusic").play();
+        musicStarted = true;
+    }
+}
+
+function noClick() {
+    noCount++;
+
+    if (noCount === 1) {
+        document.getElementById("text").innerText =
+            "🤨 Are you sure what you clicked?";
+        document.getElementById("gif").src =
+            "https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif"; // shocked pikachu
+    } else {
+        document.getElementById("text").innerText =
+            "STOP 😭 ONLY YES IS CORRECT";
+        document.getElementById("gif").src =
+            "https://media.giphy.com/media/OPU6wzx8JrHna/giphy.gif"; // crying frog
+    }
+}
+
+function yesClick() {
+    document.getElementById("text").innerHTML =
+        "YAYYY 💘<br>Best decision ever!";
+    document.getElementById("buttons").style.display = "none";
+    document.getElementById("gif").src =
+        "https://media.giphy.com/media/l4FGuhL4U2WyjdkaY/giphy.gif";
+
+    document.getElementById("text").innerHTML +=
+        "<br><br>“Every love story is beautiful,<br>but ours is my favorite.” 💕";
+}
+
+/* Hearts generator */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 15 + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 300);
+</script>
+
+</body>
+</html>
