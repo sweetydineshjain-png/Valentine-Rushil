@@ -1,60 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Be My Valentine 💖</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #ff9a9e, #fad0c4);
-            text-align: center;
-            padding-top: 100px;
-            color: #fff;
-        }
-        button {
-            padding: 15px 30px;
-            font-size: 18px;
-            margin: 10px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-        .yes {
-            background-color: #ff4d6d;
-            color: white;
-        }
-        .no {
-            background-color: #555;
-            color: white;
-        }
-    </style>
-</head>
-<body>
+<meta charset="UTF-8">
+<title>Valentine Alert 🚨</title>
 
-    <h1>Rushil, will you be my Valentine? 💘</h1>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        background: radial-gradient(circle, #ff758c, #ff7eb3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Comic Sans MS', cursive;
+        color: white;
+        overflow: hidden;
+    }
 
-    <div id="buttons">
-        <button class="yes" onclick="sayYes()">Yes 💖</button>
-        <button class="no" onclick="sayNo()">No 😶</button>
-    </div>
+    .card {
+        background: rgba(0,0,0,0.3);
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        animation: pop 1s ease;
+    }
 
-    <h2 id="message"></h2>
+    h1 {
+        animation: bounce 1.5s infinite;
+    }
 
-    <script>
-        function sayYes() {
-            document.getElementById("message").innerHTML =
-                "Yay! 💕<br><br>" +
-                "“In all the world, there is no heart for me like yours. " +
-                "In all the world, there is no love for you like mine.” 💫";
-            document.getElementById("buttons").style.display = "none";
-        }
+    button {
+        padding: 15px 35px;
+        font-size: 20px;
+        border-radius: 12px;
+        border: none;
+        margin: 15px;
+        cursor: pointer;
+        transition: transform 0.2s;
+    }
 
-        function sayNo() {
-            document.getElementById("message").innerHTML =
-                "Are you sure what you clicked? 😏<br><br>" +
-                "<button class='yes' onclick='sayYes()'>Yes 💖</button>";
-        }
-    </script>
+    button:hover {
+        transform: scale(1.1);
+    }
 
-</body>
-</html>
+    .yes {
+        background: #ff2e63;
