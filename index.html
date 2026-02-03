@@ -78,26 +78,19 @@ img {
     position: absolute;
     width: 10px;
     height: 10px;
-    background-color: red;
     animation: fall 3s linear forwards;
 }
 
 @keyframes fall {
-    0% {
-        transform: translateY(0) rotate(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: 0;
-    }
+    0% { transform: translateY(0) rotate(0); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
 }
 </style>
 </head>
 
 <body onclick="startMusic()">
 
-<!-- Soft romantic instrumental -->
+<!-- Soft romantic background music -->
 <audio id="bgMusic" loop>
     <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_7e7b5b8b2c.mp3?filename=soft-piano-ambient-112191.mp3" type="audio/mpeg">
 </audio>
@@ -110,7 +103,7 @@ img {
         <button class="no" onclick="noClick()">NO 😶</button>
     </div>
 
-    <!-- Cute cat initially -->
+    <!-- Cute cat intro -->
     <img id="gif" src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif">
 </div>
 
@@ -128,9 +121,9 @@ function noClick() {
     document.getElementById("text").innerHTML =
         "❌ WRONG ANSWER ❌<br>Try again 😤";
 
-    // Man United footballer reaction
+    // NO → football reaction GIF (your link)
     document.getElementById("gif").src =
-        "https://media.giphy.com/media/f9RzoxHizH72k15FKS/giphy.gif";
+        "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExNDI5cGN3cjV6Zmdja3FxY2c0Nm1ndG9qdmpvMWhhcW1ya3hjdmc4eiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/ncOxLk3QkR7vv10N5H/giphy.gif";
 }
 
 function yesClick() {
@@ -139,9 +132,9 @@ function yesClick() {
 
     document.getElementById("buttons").style.display = "none";
 
-    // Ronaldo SIUU
+    // YES → Ronaldo SIUU meme GIF
     document.getElementById("gif").src =
-        "https://media.giphy.com/media/5kFc7wIAfghHrCfgfb/giphy.gif";
+        "https://media.tenor.com/kjimNnah0yIAAAAM/cristiano-ronaldo-cristiano-ronaldo-meme.gif";
 
     document.getElementById("text").innerHTML +=
         "<br><br>“When the world feels heavy,<br>I still choose you — every time.” 💖";
@@ -171,7 +164,6 @@ function launchConfetti() {
         confetti.style.animationDuration =
             Math.random() * 2 + 2 + "s";
         document.body.appendChild(confetti);
-
         setTimeout(() => confetti.remove(), 3000);
     }
 }
