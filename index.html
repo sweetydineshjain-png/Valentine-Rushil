@@ -28,52 +28,64 @@
 
     h1 {
         color: #b30059;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
         z-index: 10;
     }
 
     .romantic-text {
         color: #8b004b;
-        font-size: 20px;
+        font-size: 18px;
         margin-bottom: 15px;
         z-index: 10;
+        max-width: 320px;
     }
 
     img {
-        width: 280px;
+        width: 260px;
         border-radius: 20px;
         margin-bottom: 20px;
         z-index: 10;
     }
 
     .buttons {
-        display: flex;
-        gap: 25px;
+        position: relative;
+        width: 100%;
+        height: 180px;
         z-index: 10;
     }
 
     button {
-        padding: 12px 30px;
+        padding: 12px 28px;
         font-size: 20px;
         border-radius: 30px;
         border: none;
         cursor: pointer;
+        position: absolute;
     }
 
     #yes {
         background: #ff4d88;
         color: white;
+        left: 50%;
+        transform: translateX(-120px);
+        top: 60px;
     }
 
     #no {
         background: #444;
         color: white;
-        position: absolute;
+        right: 20%;
+        top: 60px;
     }
 
     #result {
         display: none;
-        z-index: 15;
+        z-index: 20;
+        max-width: 320px;
+    }
+
+    #result h2 {
+        color: #b30059;
     }
 
     /* ❤️ Floating hearts */
@@ -96,7 +108,7 @@
         position: fixed;
         font-size: 26px;
         animation: explode 1.5s ease-out forwards;
-        z-index: 20;
+        z-index: 30;
     }
 
     @keyframes explode {
@@ -115,9 +127,10 @@
 <body>
 
 <h1>Will you be my Valentine, Rushil? 💕</h1>
-<div class="romantic-text">You already make my days brighter… will you make this Valentine special with me? 💖</div>
+<div class="romantic-text">
+    You already make my days brighter… will you make this Valentine special with me? 💖
+</div>
 
-<!-- Question GIF -->
 <img id="mainGif"
 src="https://media.tenor.com/ZrJJKvdIKQkAAAAM/patrick-spongebob.gif">
 
@@ -147,11 +160,20 @@ allow="autoplay">
 
     const startTime = Date.now();
 
-    // NO button runs for 10 seconds
+    // NO button escapes for 10 seconds (never overlaps YES)
     noBtn.addEventListener("mouseover", () => {
         if (Date.now() - startTime < 10000) {
-            noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
-            noBtn.style.top = Math.random() * (window.innerHeight - 120) + "px";
+
+            const minX = window.innerWidth / 2 + 40;
+            const maxX = window.innerWidth - 140;
+            const minY = 100;
+            const maxY = window.innerHeight - 120;
+
+            const x = Math.random() * (maxX - minX) + minX;
+            const y = Math.random() * (maxY - minY) + minY;
+
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
         }
     });
 
@@ -170,14 +192,14 @@ allow="autoplay">
     yesBtn.addEventListener("click", () => {
         mainGif.style.display = "none";
         message.innerText =
-        "Yayyy 💖 I knew it! Thank you for choosing me — I promise lots of love, laughter, and memories together 💕";
+        "Yayyy 💖 I knew it! Thank you for choosing me — I promise love, laughter, and beautiful memories together 💕";
         resultGif.src =
         "https://media.tenor.com/2mfG8pdR5UgAAAAM/dog-laughing-funny-dog.gif";
         result.style.display = "block";
         fireworks();
     });
 
-    // ❤️ Continuous hearts
+    // ❤️ Continuous flying hearts
     setInterval(() => {
         const heart = document.createElement("div");
         heart.className = "heart";
