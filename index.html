@@ -2,45 +2,42 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine 💖</title>
+<title>Valentine 💕</title>
 
 <style>
     body {
+        margin: 0;
+        height: 100vh;
+        background: #ffe6ec;
         font-family: 'Comic Sans MS', cursive;
         text-align: center;
-        background: linear-gradient(#ff9a9e, #fad0c4);
-        height: 100vh;
-        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 
     h1 {
-        margin-top: 40px;
-        font-size: 32px;
-        color: #b30059;
-        z-index: 10;
-        position: relative;
+        color: #d63384;
+        margin-bottom: 20px;
     }
 
     img {
-        width: 300px;
-        margin: 20px;
+        width: 280px;
         border-radius: 15px;
-        z-index: 10;
-        position: relative;
+        margin-bottom: 25px;
     }
 
     .buttons {
-        margin-top: 30px;
-        position: relative;
-        height: 200px;
-        z-index: 10;
+        display: flex;
+        gap: 20px;
     }
 
     button {
+        padding: 12px 30px;
         font-size: 20px;
-        padding: 12px 25px;
-        border: none;
         border-radius: 25px;
+        border: none;
         cursor: pointer;
     }
 
@@ -52,124 +49,48 @@
     #no {
         background-color: #555;
         color: white;
-        position: absolute;
     }
 
-    #popup {
+    #result {
         display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        padding: 20px;
-        border-radius: 20px;
-        box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        z-index: 20;
-    }
-
-    #popup img {
-        width: 250px;
-    }
-
-    /* ❤️ Floating Hearts */
-    .heart {
-        position: fixed;
-        bottom: -20px;
-        font-size: 24px;
-        animation: floatUp linear forwards;
-        opacity: 0.8;
-        z-index: 1;
-    }
-
-    @keyframes floatUp {
-        from {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateY(-100vh);
-            opacity: 0;
-        }
+        margin-top: 20px;
     }
 </style>
 </head>
 
 <body>
 
-<h1>Will you be my Valentine, Rushil? 💕</h1>
+<h1>Will you be my Valentine, Rushil? 💖</h1>
 
-<img src="https://share.google/uVYkQTKDoJgtyqvUk">
+<!-- Question GIF -->
+<img id="mainGif"
+src="https://media.tenor.com/ZrJJKvdIKQkAAAAM/patrick-spongebob.gif">
 
 <div class="buttons">
-    <button id="yes">YES 💖</button>
+    <button id="yes">YES 💘</button>
     <button id="no">NO 😝</button>
 </div>
 
-<div id="popup">
-    <img id="popupGif">
+<div id="result">
+    <img id="resultGif">
 </div>
 
-<!-- Background Music -->
-<iframe width="0" height="0"
-src="https://www.youtube.com/embed/p_CtUCig6LQ?autoplay=1&loop=1&playlist=p_CtUCig6LQ"
-allow="autoplay">
-</iframe>
-
 <script>
-    const noBtn = document.getElementById("no");
-    const yesBtn = document.getElementById("yes");
-    const popup = document.getElementById("popup");
-    const popupGif = document.getElementById("popupGif");
+    const mainGif = document.getElementById("mainGif");
+    const result = document.getElementById("result");
+    const resultGif = document.getElementById("resultGif");
 
-    let startTime = Date.now();
+    document.getElementById("yes").onclick = () => {
+        mainGif.style.display = "none";
+        resultGif.src = "https://media.tenor.com/2mfG8pdR5UgAAAAM/dog-laughing-funny-dog.gif";
+        result.style.display = "block";
+    };
 
-    // NO button runs away for 5 sec
-    noBtn.addEventListener("mouseover", () => {
-        if (Date.now() - startTime < 5000) {
-            noBtn.style.left = Math.random() * (window.innerWidth - 100) + "px";
-            noBtn.style.top = Math.random() * (window.innerHeight - 100) + "px";
-        }
-    });
-
-    // NO click after 5 sec
-    noBtn.addEventListener("click", () => {
-        if (Date.now() - startTime >= 5000) {
-            popupGif.src = "https://share.google/vkjJJ4IllKG4EJhGj";
-            popup.style.display = "block";
-        }
-    });
-
-    // YES click
-    yesBtn.addEventListener("click", () => {
-        popupGif.src = "https://share.google/Co8h5L00RcG9DvqnD";
-        popup.style.display = "block";
-        heartBurst();
-    });
-
-    // ❤️ Floating hearts continuously
-    setInterval(() => {
-        const heart = document.createElement("div");
-        heart.classList.add("heart");
-        heart.innerHTML = "❤️";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
-        document.body.appendChild(heart);
-        setTimeout(() => heart.remove(), 6000);
-    }, 300);
-
-    // 💖 Heart burst on YES
-    function heartBurst() {
-        for (let i = 0; i < 30; i++) {
-            const heart = document.createElement("div");
-            heart.classList.add("heart");
-            heart.innerHTML = "💖";
-            heart.style.left = (50 + Math.random() * 20 - 10) + "vw";
-            heart.style.animationDuration = "2s";
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 2000);
-        }
-    }
+    document.getElementById("no").onclick = () => {
+        mainGif.style.display = "none";
+        resultGif.src = "https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUycmF3bWI5NnA0bm85emtsM3Z1cnpxdTNlaWI1cmNxaWhzeTQ4bTV6eSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/relnvfSEa2Qa125uPA/source.gif";
+        result.style.display = "block";
+    };
 </script>
 
 </body>
