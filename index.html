@@ -28,14 +28,21 @@
 
     h1 {
         color: #b30059;
+        margin-bottom: 10px;
+        z-index: 10;
+    }
+
+    .romantic-text {
+        color: #8b004b;
+        font-size: 20px;
         margin-bottom: 15px;
         z-index: 10;
     }
 
     img {
         width: 280px;
-        border-radius: 18px;
-        margin-bottom: 25px;
+        border-radius: 20px;
+        margin-bottom: 20px;
         z-index: 10;
     }
 
@@ -61,14 +68,15 @@
     #no {
         background: #444;
         color: white;
+        position: absolute;
     }
 
     #result {
         display: none;
-        z-index: 10;
+        z-index: 15;
     }
 
-    /* ❤️ Floating Hearts */
+    /* ❤️ Floating hearts */
     .heart {
         position: fixed;
         bottom: -20px;
@@ -95,8 +103,8 @@
         from { transform: scale(0.5); opacity: 1; }
         to {
             transform: translate(
-                calc(-100px + 200px * var(--x)),
-                calc(-100px + 200px * var(--y))
+                calc(-120px + 240px * var(--x)),
+                calc(-120px + 240px * var(--y))
             ) scale(1.2);
             opacity: 0;
         }
@@ -107,6 +115,7 @@
 <body>
 
 <h1>Will you be my Valentine, Rushil? 💕</h1>
+<div class="romantic-text">You already make my days brighter… will you make this Valentine special with me? 💖</div>
 
 <!-- Question GIF -->
 <img id="mainGif"
@@ -118,30 +127,57 @@ src="https://media.tenor.com/ZrJJKvdIKQkAAAAM/patrick-spongebob.gif">
 </div>
 
 <div id="result">
+    <h2 id="message"></h2>
     <img id="resultGif">
 </div>
 
+<!-- 🎵 Soft Background Song -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/p_CtUCig6LQ?autoplay=1&loop=1&playlist=p_CtUCig6LQ"
+allow="autoplay">
+</iframe>
+
 <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
     const mainGif = document.getElementById("mainGif");
     const result = document.getElementById("result");
     const resultGif = document.getElementById("resultGif");
+    const message = document.getElementById("message");
+
+    const startTime = Date.now();
+
+    // NO button runs for 10 seconds
+    noBtn.addEventListener("mouseover", () => {
+        if (Date.now() - startTime < 10000) {
+            noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+            noBtn.style.top = Math.random() * (window.innerHeight - 120) + "px";
+        }
+    });
+
+    // NO click after 10 sec
+    noBtn.addEventListener("click", () => {
+        if (Date.now() - startTime >= 10000) {
+            mainGif.style.display = "none";
+            message.innerText = "Ouch 💔 That hurt… but I’ll still smile because you matter to me.";
+            resultGif.src =
+            "https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUycmF3bWI5NnA0bm85emtsM3Z1cnpxdTNlaWI1cmNxaWhzeTQ4bTV6eSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/relnvfSEa2Qa125uPA/source.gif";
+            result.style.display = "block";
+        }
+    });
 
     // YES click
-    document.getElementById("yes").onclick = () => {
+    yesBtn.addEventListener("click", () => {
         mainGif.style.display = "none";
-        resultGif.src = "https://media.tenor.com/2mfG8pdR5UgAAAAM/dog-laughing-funny-dog.gif";
+        message.innerText =
+        "Yayyy 💖 I knew it! Thank you for choosing me — I promise lots of love, laughter, and memories together 💕";
+        resultGif.src =
+        "https://media.tenor.com/2mfG8pdR5UgAAAAM/dog-laughing-funny-dog.gif";
         result.style.display = "block";
         fireworks();
-    };
+    });
 
-    // NO click
-    document.getElementById("no").onclick = () => {
-        mainGif.style.display = "none";
-        resultGif.src = "https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUycmF3bWI5NnA0bm85emtsM3Z1cnpxdTNlaWI1cmNxaWhzeTQ4bTV6eSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/relnvfSEa2Qa125uPA/source.gif";
-        result.style.display = "block";
-    };
-
-    // ❤️ Continuous flying hearts
+    // ❤️ Continuous hearts
     setInterval(() => {
         const heart = document.createElement("div");
         heart.className = "heart";
@@ -152,9 +188,9 @@ src="https://media.tenor.com/ZrJJKvdIKQkAAAAM/patrick-spongebob.gif">
         setTimeout(() => heart.remove(), 6000);
     }, 300);
 
-    // 🎆 Firework hearts on YES
+    // 🎆 Fireworks on YES
     function fireworks() {
-        for (let i = 0; i < 30; i++) {
+        for (let i = 0; i < 35; i++) {
             const fire = document.createElement("div");
             fire.className = "fire";
             fire.innerHTML = "💖";
