@@ -2,65 +2,111 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Valentine 💕</title>
+<title>Be My Valentine 💖</title>
 
 <style>
     body {
         margin: 0;
         height: 100vh;
-        background: #ffe6ec;
         font-family: 'Comic Sans MS', cursive;
         text-align: center;
+        overflow: hidden;
+        background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
+        background-size: 800% 800%;
+        animation: bgMove 15s ease infinite;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
 
+    @keyframes bgMove {
+        0% {background-position: 0% 50%;}
+        50% {background-position: 100% 50%;}
+        100% {background-position: 0% 50%;}
+    }
+
     h1 {
-        color: #d63384;
-        margin-bottom: 20px;
+        color: #b30059;
+        margin-bottom: 15px;
+        z-index: 10;
     }
 
     img {
         width: 280px;
-        border-radius: 15px;
+        border-radius: 18px;
         margin-bottom: 25px;
+        z-index: 10;
     }
 
     .buttons {
         display: flex;
-        gap: 20px;
+        gap: 25px;
+        z-index: 10;
     }
 
     button {
         padding: 12px 30px;
         font-size: 20px;
-        border-radius: 25px;
+        border-radius: 30px;
         border: none;
         cursor: pointer;
     }
 
     #yes {
-        background-color: #ff4d88;
+        background: #ff4d88;
         color: white;
     }
 
     #no {
-        background-color: #555;
+        background: #444;
         color: white;
     }
 
     #result {
         display: none;
-        margin-top: 20px;
+        z-index: 10;
+    }
+
+    /* ❤️ Floating Hearts */
+    .heart {
+        position: fixed;
+        bottom: -20px;
+        font-size: 22px;
+        animation: floatUp linear forwards;
+        opacity: 0.8;
+        z-index: 1;
+    }
+
+    @keyframes floatUp {
+        from { transform: translateY(0); opacity: 1; }
+        to { transform: translateY(-110vh); opacity: 0; }
+    }
+
+    /* 🎆 Firework hearts */
+    .fire {
+        position: fixed;
+        font-size: 26px;
+        animation: explode 1.5s ease-out forwards;
+        z-index: 20;
+    }
+
+    @keyframes explode {
+        from { transform: scale(0.5); opacity: 1; }
+        to {
+            transform: translate(
+                calc(-100px + 200px * var(--x)),
+                calc(-100px + 200px * var(--y))
+            ) scale(1.2);
+            opacity: 0;
+        }
     }
 </style>
 </head>
 
 <body>
 
-<h1>Will you be my Valentine, Rushil? 💖</h1>
+<h1>Will you be my Valentine, Rushil? 💕</h1>
 
 <!-- Question GIF -->
 <img id="mainGif"
@@ -80,17 +126,46 @@ src="https://media.tenor.com/ZrJJKvdIKQkAAAAM/patrick-spongebob.gif">
     const result = document.getElementById("result");
     const resultGif = document.getElementById("resultGif");
 
+    // YES click
     document.getElementById("yes").onclick = () => {
         mainGif.style.display = "none";
         resultGif.src = "https://media.tenor.com/2mfG8pdR5UgAAAAM/dog-laughing-funny-dog.gif";
         result.style.display = "block";
+        fireworks();
     };
 
+    // NO click
     document.getElementById("no").onclick = () => {
         mainGif.style.display = "none";
         resultGif.src = "https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUycmF3bWI5NnA0bm85emtsM3Z1cnpxdTNlaWI1cmNxaWhzeTQ4bTV6eSZlcD12MV9naWZzX3NlYXJjaCZjdD1n/relnvfSEa2Qa125uPA/source.gif";
         result.style.display = "block";
     };
+
+    // ❤️ Continuous flying hearts
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 6000);
+    }, 300);
+
+    // 🎆 Firework hearts on YES
+    function fireworks() {
+        for (let i = 0; i < 30; i++) {
+            const fire = document.createElement("div");
+            fire.className = "fire";
+            fire.innerHTML = "💖";
+            fire.style.left = "50%";
+            fire.style.top = "50%";
+            fire.style.setProperty("--x", Math.random());
+            fire.style.setProperty("--y", Math.random());
+            document.body.appendChild(fire);
+            setTimeout(() => fire.remove(), 1500);
+        }
+    }
 </script>
 
 </body>
